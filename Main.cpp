@@ -21,7 +21,7 @@ int main(int args, char const *argv[])
 							// {
 							// 	for(int i=1;i<cmdchuncks.size()-2;++i)
 							// }
-							sha1(cmdchunks[1],cmdchunks[2],tr1,tr2);//name_of_file, mtorrent_file(with extension), socket_of_tracker1, socket_of_tracker2
+							to_tracker_1(cmdchunks[1],cmdchunks[2],tr1,tr2);//name_of_file, mtorrent_file(with extension), socket_of_tracker1, socket_of_tracker2
 						}
 	return 0;
 }

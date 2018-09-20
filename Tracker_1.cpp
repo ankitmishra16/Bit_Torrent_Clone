@@ -2,14 +2,14 @@
 using namespace std; 
 #define PORT 8080 
 map<string, vector<pair<string, string> > > seeder_list;
-void to_tracker(string hash, string address_file, string socket_client) 
+int main() 
 { 
     int server_fd, new_socket, valread; 
     struct sockaddr_in address; 
     int opt = 1; 
     int addrlen = sizeof(address); 
     char buffer[1024] = {0};
-    // string nxt,hash, address_file, socket_client;  
+    string nxt,hash, address_file, socket_client;  
        
     // Creating socket file descriptor 
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) 
@@ -54,19 +54,20 @@ void to_tracker(string hash, string address_file, string socket_client)
             stringstream ss(buffer);
             ss >> nxt;
             hash=nxt;
-            // cout<<"\nHash : "<<hash;
+            cout<<"\nHash : "<<hash;
             nxt.clear();
             ss >> nxt;
             address_file=nxt;
-            // cout<<"\n Address of file : "<<address_file;
+            cout<<"\n Address of file : "<<address_file;
             nxt.clear();
             ss >> nxt;
             socket_client=nxt;
-            // cout<<"\nSocket : "<<socket_client<<"\n";
+            cout<<"\nSocket : "<<socket_client<<"\n";
             nxt.clear();
-            // seeder_list.insert({hash, pair<address_file, socket_client>});
+            // seeder_list.insert({hash, make_pair(address_file, socket_client)});
             seeder_list[hash].push_back(make_pair(address_file, socket_client));
             map<string, vector<pair<string,string> > > :: iterator itr;
+            cout<<"\n Printing Values in map ";
             for(itr= seeder_list.begin();itr!=seeder_list.end();itr++)
             {
                 for(int i=0;i<seeder_list[itr->first].size();i++)

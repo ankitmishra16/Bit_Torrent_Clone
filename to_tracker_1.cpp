@@ -1,5 +1,6 @@
 #include "global.h" 
 #define PORT 8080 
+#define MAX_BUF_LEN (512*1000)
 using namespace std;
    
 int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP) 
@@ -26,42 +27,8 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
         return -1; 
     } 
     ch='n';
-    //*********MODULE OF SHA***************
 
-    // string hash_o;
-    // FILE * pf,*trt;
-    // unsigned long size;
-    // unsigned char out[ SHA_DIGEST_LENGTH ];
-    // char hex[2*SHA_DIGEST_LENGTH];
-    // unsigned char buf[ MAX_BUF_LEN ];
-
-    // pf = fopen( name.c_str(), "rb" );
-
-    // struct stat stat_buf;//to get size of the file
-    // stat(name.c_str(), &stat_buf);
-    // size=stat_buf.st_size; 
-    // trt=fopen(mtorrent_file.c_str(), "w");
-
-    // string complete_path=realpath(name.c_str(),NULL);//to get real path of the file
-
-    // while(fread( buf, 1, MAX_BUF_LEN, pf )>0)//for creating SHA1 hash of  chunks of file
-    // {
-    //     SHA1(buf,sizeof(buf),out);
-    //     bin2hex(out,sizeof(out), hex);
-    //     string temp(hex,20);
-    //     hash_o=hash_o+temp;
-    // }
-
-    // fprintf(trt,"%s\n%s\n%s\n%lu\n%s",tr1IP.c_str(), tr2IP.c_str(), complete_path.c_str(),size,hash_o.c_str());
-    // fclose(pf);
-
-
-    //**********UPTO HERE CODE IS OF SHA***************
     do{
-        // cout<<"\n Enter hash : ";//taking input
-        // cin>>hash;
-        // cout<<"\n Enter address of file : ";
-        // cin>>address_of_file;
 
         //*********MODULE OF SHA***************
         string hash_o;
@@ -110,9 +77,14 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
         printf("\n Message sent");
         cout<<"\n Want to share more files...(Y/N)"; 
         cin>>ch;
-        if(ch=='y'||ch=='Y')
+        cout<<"\n Value of ch is : "<<ch;
+        if(ch=='y'|| ch=='Y')
         {
+            cout<<"\n Inside first if ";
+            cmd.clear();
+            cin.ignore();
             getline(cin, cmd);
+            cout<<"\n After getline() ";
             stringstream ss(cmd);
             string temp;
             ss>>temp;
@@ -127,7 +99,7 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
                 mtorrent_file=temp;
                 temp.clear();
                 ss>>temp;
-                
+
             }
         }
     }while(ch=='y'||ch=='Y');

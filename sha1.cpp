@@ -3,7 +3,7 @@
 
 int sha1(string name,string mtorrent_file, string tr1IP, string tr2IP) 
 {
-	string hash;
+	string hash_o;
     FILE * pf,*trt;
     unsigned long size;
     unsigned char out[ SHA_DIGEST_LENGTH ];
@@ -24,10 +24,10 @@ int sha1(string name,string mtorrent_file, string tr1IP, string tr2IP)
         SHA1(buf,sizeof(buf),out);
         bin2hex(out,sizeof(out), hex);
         string temp(hex,20);
-        hash=hash+temp;
+        hash_o=hash_o+temp;
     }
 
-    fprintf(trt,"%s\n%s\n%s\n%lu\n%s",tr1IP.c_str(), tr2IP.c_str(), complete_path.c_str(),size,hash.c_str());
+    fprintf(trt,"%s\n%s\n%s\n%lu\n%s",tr1IP.c_str(), tr2IP.c_str(), complete_path.c_str(),size,hash_o.c_str());
     fclose(pf);
 
     return 0;

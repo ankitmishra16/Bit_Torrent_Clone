@@ -15,7 +15,7 @@ using namespace std;
 #ifndef INC_GLOBAL_H//header fle for listing the directories
 #define INC_GLOBAL_H
 
-int sha1(string,string, string, string );
+int to_tracker_1(string,string, string, string );
 void bin2hex( unsigned char* , int , char* );
 
 #endif 
