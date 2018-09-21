@@ -3,13 +3,13 @@
 #define MAX_BUF_LEN (512*1000)
 using namespace std;
    
-int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP) 
+int to_tracker_1(string socket_of_client, string name,string mtorrent_file, string tr1IP, int tr1port, string tr2IP, int tr2port) 
 { 
     struct sockaddr_in address; //Declaration && Initialization
     int sock = 0, valread; 
     struct sockaddr_in serv_addr; 
     char ch,buffer[1024] = {0}; 
-    string hash, address_of_file, socket_of_client,cmd;
+    string hash, address_of_file, cmd;
 
     cout<<"\n Creating Socket...";
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
@@ -19,7 +19,8 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
     } 
    
     serv_addr.sin_family = AF_INET; 
-    serv_addr.sin_port = htons(PORT); 
+    serv_addr.sin_port = htons(tr1port);// PORT(integer) of tracker); //both are to be passed at the tym of execution
+    serv_addr.sin_addr.s_addr = inet_addr(tr1IP.c_str());//character array of IP address of tracker ) 
    
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) 
     { 
@@ -55,39 +56,39 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
             hash_o=hash_o+temp;
         }
 
-        cout<<"\n Hash before writing : "<<hash_o;
+        // cout<<"\n Hash before writing : "<<hash_o;
         fprintf(trt,"%s\n%s\n%s\n%lu\n%s",tr1IP.c_str(), tr2IP.c_str(), complete_path.c_str(),size,hash_o.c_str());
         cout<<"\n After writting in mtorrent_file";
         fclose(pf);
         fclose(trt);
         //**********UPTO HERE CODE IS OF SHA***************
 
-        cout<<"\n Enter the socket of client : ";
-        cin>>socket_of_client;
+        // cout<<"\n Enter the socket of client : ";
+        // cin>>socket_of_client;
         hash=hash_o.substr(0,20);
         hash=hash+" ";//apending whole data                                            
         hash+=complete_path ;
         hash+=" ";
         hash+=socket_of_client;
         hash+=" ";
-        hash+="000";
+        // hash+="000";
 
 
         send(sock , hash.c_str() , hash.length(), 0 );
         hash.clear();
         address_of_file.clear();
-        socket_of_client.clear(); 
+        // socket_of_client.clear(); 
         printf("\n Message sent");
         cout<<"\n Want to share more files...(Y/N)"; 
         cin>>ch;
         cout<<"\n Value of ch is : "<<ch;
         if(ch=='y'|| ch=='Y')
         {
-            cout<<"\n Inside first if ";
+            // cout<<"\n Inside first if ";
             cmd.clear();
             cin.ignore();
             getline(cin, cmd);
-            cout<<"\n After getline() ";
+            // cout<<"\n After getline() ";
             stringstream ss(cmd);
             string temp;
             ss>>temp;

@@ -12,11 +12,13 @@
 #include <string>
 #include<map>
 #include<thread>
+#include<fstream>
+#include<arpa/inet.h>
 using namespace std;
 #ifndef INC_GLOBAL_H//header fle for listing the directories
 #define INC_GLOBAL_H
 
-int to_tracker_1(string,string, string, string );
+int to_tracker_1(string,string,string, string, int, string, int );
 void bin2hex( unsigned char* , int , char* );
 
 #endif 
