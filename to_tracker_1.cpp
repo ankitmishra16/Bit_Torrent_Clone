@@ -55,8 +55,11 @@ int to_tracker_1(string name,string mtorrent_file, string tr1IP, string tr2IP)
             hash_o=hash_o+temp;
         }
 
+        cout<<"\n Hash before writing : "<<hash_o;
         fprintf(trt,"%s\n%s\n%s\n%lu\n%s",tr1IP.c_str(), tr2IP.c_str(), complete_path.c_str(),size,hash_o.c_str());
+        cout<<"\n After writting in mtorrent_file";
         fclose(pf);
+        fclose(trt);
         //**********UPTO HERE CODE IS OF SHA***************
 
         cout<<"\n Enter the socket of client : ";

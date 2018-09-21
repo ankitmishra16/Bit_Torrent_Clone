@@ -11,6 +11,7 @@
 #include <netinet/in.h> 
 #include <string>
 #include<map>
+#include<thread>
 using namespace std;
 #ifndef INC_GLOBAL_H//header fle for listing the directories
 #define INC_GLOBAL_H
